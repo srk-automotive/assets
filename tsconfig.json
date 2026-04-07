@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    
+    /* Output Settings - Fixes the outDir error */
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist", 
+    "rootDir": "src", /* Fixes the common source directory error */
+    
+    /* Interop & Environment */
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts"]
+}

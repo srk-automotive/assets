@@ -1,0 +1,42 @@
+name: Deploy SRK Assets
+
+on:
+  push:
+    tags:
+      - "v*" # Triggers only on tags starting with 'v' (e.g., v1.0.1)
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # Critical for GPR
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@srk-automotive"
+
+      - name: Inject Version from Tag
+        run: |
+          # Extracts the tag name (e.g., v1.0.2) and removes the 'v'
+          VERSION=${GITHUB_REF#refs/tags/v}
+          npm version $VERSION --no-git-tag-version --allow-same-version
+      - name: Install & Build
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm build
+
+      - name: Publish to GitHub Packages
+        run: pnpm publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

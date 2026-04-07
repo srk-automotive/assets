@@ -1,0 +1,44 @@
+{
+  "name": "@srk-automotive/assets",
+  "version": "0.0.0-dev",
+  "description": "Central Asset Vault for SRK Automotive",
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srk-automotive/assets.git"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "author": "SRK Automotive",
+  "license": "ISC",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./branding": {
+      "types": "./dist/branding.d.ts",
+      "import": "./dist/branding.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.5",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}
